@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}DaysSchedule index{% endblock %}
+
+{% block body %}
+    <h1>DaysSchedule index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Schedules</th>
+                <th>Grades</th>
+                <th>Weekdays</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for days_schedule in days_schedules %}
+            <tr>
+                <td>{{ days_schedule.id }}</td>
+                <td>{{ days_schedule.schedules }}</td>
+                <td>{{ days_schedule.grades }}</td>
+                <td>{{ days_schedule.weekdays }}</td>
+                <td>
+                    <a href="{{ path('app_days_schedule_show', {'id': days_schedule.id}) }}">show</a>
+                    <a href="{{ path('app_days_schedule_edit', {'id': days_schedule.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="5">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_days_schedule_new') }}">Create new</a>
+{% endblock %}

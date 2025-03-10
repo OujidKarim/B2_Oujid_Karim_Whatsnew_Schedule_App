@@ -1,0 +1,11 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}New DaysSchedule{% endblock %}
+
+{% block body %}
+    <h1>Create new DaysSchedule</h1>
+
+    {{ include('days_schedule/_form.html.twig') }}
+
+    <a href="{{ path('app_days_schedule_index') }}">back to list</a>
+{% endblock %}

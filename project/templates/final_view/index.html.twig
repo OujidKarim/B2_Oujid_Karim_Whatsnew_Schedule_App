@@ -1,0 +1,60 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Schedule{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1 class="mb-4">Weekly Schedule</h1>
+
+    <div class="row">
+        <div class="col-md-4">
+            <h3>B1</h3>
+            {% if B1 %}
+                <ul class="list-group">
+                    {% for schedule in B1 %}
+                        <li class="list-group-item">
+                            {{ schedule.name }} - {{ schedule.startTime|date('H:i') }} to {{ schedule.endTime|date('H:i') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No schedule for B1 today</p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-4">
+            <h3>B2</h3>
+            {% if B2 %}
+                <ul class="list-group">
+                    {% for schedule in B2 %}
+                        <li class="list-group-item">
+                            {{ schedule.name }} - {{ schedule.startTime|date('H:i') }} to {{ schedule.endTime|date('H:i') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No schedule for B2 today</p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-4">
+            <h3>B3</h3>
+            {% if B3 %}
+                <ul class="list-group">
+                    {% for schedule in B3 %}
+                        <li class="list-group-item">
+                            {{ schedule.name }} - {{ schedule.startTime|date('H:i') }} to {{ schedule.endTime|date('H:i') }}
+                        </li>
+                    {% endfor %}
+                </ul>
+            {% else %}
+                <p>No schedule for B3 today</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="mt-4">
+        <h4>Week: {{ week.first }} to {{ week.last }}</h4>
+    </div>
+</div>
+{% endblock %}
