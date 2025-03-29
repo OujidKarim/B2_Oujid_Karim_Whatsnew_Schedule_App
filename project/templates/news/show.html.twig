@@ -1,0 +1,25 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ news.title }}{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <article>
+        <h1>{{ news.title }}</h1>
+        
+        {% if news.imageName %}
+            <img src="{{ asset('images/news/' ~ news.imageName) }}" alt="">
+        {% endif %}
+
+        <p class="text-muted">Publié le {{ news.createdAt|date('d/m/Y') }}</p>
+
+        <div class="news-content">
+            {{ news.description|raw }}
+        </div>
+
+        <a href="{{ path('app_news') }}" class="btn btn-secondary mt-4">
+            Retour à la liste des actualités
+        </a>
+    </article>
+</div>
+{% endblock %}

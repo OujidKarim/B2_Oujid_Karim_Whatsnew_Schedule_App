@@ -1,38 +1,53 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Latest News{% endblock %}
+{% block title %}Actualités{% endblock %}
 
 {% block body %}
 <div class="container mt-4">
-    <h1 class="mb-4">Actualité Amiens</h1>
+    <h1>Actualités</h1>
 
-    {% if error is defined %}
-        <div class="alert alert-danger">
-            {{ error }}
-        </div>
-    {% else %}
+    <h2>Actualités locales</h2>
+    {% if localNews|length > 0 %}
         <div class="row">
-            {% for item in items %}
-                <div class="col-md-6 mb-4">
-                    <div class="card h-100">
-                        {% if item.image %}
-                            <img src="{{ item.image }}" class="card-img-top" alt="{{ item.title }}" style="height: 200px; object-fit: cover;">
+            {% for news in localNews %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if news.imageName %}
+                            <img src="{{ asset('images/news/' ~ news.imageName) }}" class="card-img-top" alt="{{ news.title }}">
                         {% endif %}
                         <div class="card-body">
-                            <h5 class="card-title">
-                                <a href="{{ item.link }}" target="_blank" rel="noopener noreferrer">
-                                    {{ item.title }}
-                                </a>
-                            </h5>
-                            <p class="card-text">{{ item.description }}</p>
-                        </div>
-                        <div class="card-footer text-muted">
-                            Published: {{ item.pubDate|date('d M Y H:i') }}
+                            <h5 class="card-title">{{ news.title }}</h5>
+                            <p class="card-text">{{ news.description|slice(0, 100) }}...</p>
+                            <a href="{{ path('app_news_show', {'id': news.id}) }}" class="btn btn-primary">Lire la suite</a>
                         </div>
                     </div>
                 </div>
             {% endfor %}
         </div>
+    {% else %}
+        <p>Aucune actualité locale disponible pour le moment.</p>
+    {% endif %}
+
+    <h2 class="mt-5">Actualités externes</h2>
+    {% if externalNews|length > 0 %}
+        <div class="row">
+            {% for news in externalNews %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if news.image %}
+                            <img src="{{ news.image}}" class="card-img-top" alt="{{ news.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ news.title }}</h5>
+                            <p class="card-text">{{ news.description|slice(0, 100) }}...</p>
+                            <a href="{{ news.link }}" class="btn btn-primary" target="_blank">Lire la suite</a>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>Aucune actualité externe disponible pour le moment.</p>
     {% endif %}
 </div>
 {% endblock %}

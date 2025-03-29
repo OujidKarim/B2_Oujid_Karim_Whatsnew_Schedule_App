@@ -1,0 +1,20 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Créer une actualité{% endblock %}
+
+{% block body %}
+<div class="container mt-4">
+    <h1>Créer une nouvelle actualité</h1>
+
+    {{ form_start(form, {'attr': {'enctype': 'multipart/form-data'}}) }}
+        {{ form_row(form.title) }}
+        {{ form_row(form.description) }}
+        {{ form_row(form.imageFile) }}
+        <button type="submit" class="btn btn-primary">Créer</button>
+    {{ form_end(form) }}
+
+    <a href="{{ path('app_news') }}" class="btn btn-secondary mt-3">
+        Retour à la liste des actualités
+    </a>
+</div>
+{% endblock %}

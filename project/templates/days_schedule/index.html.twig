@@ -8,9 +8,9 @@
     <table class="table">
         <thead>
             <tr>
-                <th>Id</th>
-                <th>Schedules</th>
                 <th>Grades</th>
+                <th>subjects</th>
+                <th>Schedules</th>
                 <th>Weekdays</th>
                 <th>actions</th>
             </tr>
@@ -18,13 +18,14 @@
         <tbody>
         {% for days_schedule in days_schedules %}
             <tr>
-                <td>{{ days_schedule.id }}</td>
-                <td>{{ days_schedule.schedules }}</td>
-                <td>{{ days_schedule.grades }}</td>
-                <td>{{ days_schedule.weekdays }}</td>
+                <td>{{ days_schedule.grades.value }}</td>
+                <td>{{ days_schedule.subject }}</td>
+                <td>{{ days_schedule.schedules.value }}</td>
+                <td>{{ days_schedule.weekdays.value }}</td>
                 <td>
                     <a href="{{ path('app_days_schedule_show', {'id': days_schedule.id}) }}">show</a>
                     <a href="{{ path('app_days_schedule_edit', {'id': days_schedule.id}) }}">edit</a>
+                    <a href="{{ path('app_days_schedule_delete', {'id': days_schedule.id}) }}">Supprimer</a>
                 </td>
             </tr>
         {% else %}

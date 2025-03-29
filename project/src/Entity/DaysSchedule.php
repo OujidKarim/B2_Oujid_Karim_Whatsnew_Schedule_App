@@ -25,6 +25,12 @@ class DaysSchedule
     #[ORM\Column(enumType: WeekDays::class)]
     private ?WeekDays $weekdays = null;
 
+    #[ORM\Column(type: 'date')]
+    private ?\DateTimeInterface $date = null;
+
+    #[ORM\Column(length: 255)]
+    private ?string $subject = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -62,6 +68,30 @@ class DaysSchedule
     public function setWeekdays(WeekDays $weekdays): static
     {
         $this->weekdays = $weekdays;
+
+        return $this;
+    }
+
+    public function getDate(): ?\DateTimeInterface
+    {
+        return $this->date;
+    }
+
+    public function setDate(\DateTimeInterface $date): static
+    {
+        $this->date = $date;
+
+        return $this;
+    }
+
+    public function getSubject(): ?string
+    {
+        return $this->subject;
+    }
+
+    public function setSubject(string $subject): static
+    {
+        $this->subject = $subject;
 
         return $this;
     }

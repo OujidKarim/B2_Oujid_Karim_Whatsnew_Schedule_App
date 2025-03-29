@@ -1,34 +1,41 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}DaysSchedule{% endblock %}
+{% block title %}DaysSchedule
+{% endblock %}
 
 {% block body %}
-    <h1>DaysSchedule</h1>
+	<h1>DaysSchedule</h1>
 
-    <table class="table">
-        <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ days_schedule.id }}</td>
-            </tr>
-            <tr>
-                <th>Schedules</th>
-                <td>{{ days_schedule.schedules }}</td>
-            </tr>
-            <tr>
-                <th>Grades</th>
-                <td>{{ days_schedule.grades }}</td>
-            </tr>
-            <tr>
-                <th>Weekdays</th>
-                <td>{{ days_schedule.weekdays }}</td>
-            </tr>
-        </tbody>
-    </table>
+	<table class="table">
+		<tbody>
+			<tr>
+				<th>Id</th>
+				<td>{{ days_schedule.id }}</td>
+			</tr>
+			<tr>
+				<th>Subject</th>
+				<td>{{ days_schedule.subject }}</td>
+			</tr>
+			<tr>
+				<th>Schedules</th>
+				<td>{{ days_schedule.schedules.value }}</td>
+			</tr>
+			<tr>
+				<th>Grades</th>
+				<td>{{ days_schedule.grades.value }}</td>
+			</tr>
+			<tr>
+				<th>Weekdays</th>
+				<td>{{ days_schedule.weekdays.value }}</td>
+			</tr>
+		</tbody>
+	</table>
 
-    <a href="{{ path('app_days_schedule_index') }}">back to list</a>
+	<a href="{{ path('app_days_schedule_index') }}">back to list</a>
 
-    <a href="{{ path('app_days_schedule_edit', {'id': days_schedule.id}) }}">edit</a>
+	<a href="{{ path('app_days_schedule_edit', {'id': days_schedule.id}) }}">edit</a>
 
-    {{ include('days_schedule/_delete_form.html.twig') }}
+	<a href="{{ path('app_days_schedule_delete', {'id': days_schedule.id}) }}">Supprimer</a>
+
+
 {% endblock %}

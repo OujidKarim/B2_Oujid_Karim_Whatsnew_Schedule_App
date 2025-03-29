@@ -13,7 +13,7 @@
                 <ul class="list-group">
                     {% for schedule in B1 %}
                         <li class="list-group-item">
-                            {{ schedule.name }} - {{ schedule.startTime|date('H:i') }} to {{ schedule.endTime|date('H:i') }}
+                            {{ schedule.subject }} ({{ schedule.schedules.value }})
                         </li>
                     {% endfor %}
                 </ul>
@@ -28,7 +28,7 @@
                 <ul class="list-group">
                     {% for schedule in B2 %}
                         <li class="list-group-item">
-                            {{ schedule.name }} - {{ schedule.startTime|date('H:i') }} to {{ schedule.endTime|date('H:i') }}
+                            {{ schedule.subject }} ({{ schedule.schedules.value }})
                         </li>
                     {% endfor %}
                 </ul>
@@ -43,7 +43,7 @@
                 <ul class="list-group">
                     {% for schedule in B3 %}
                         <li class="list-group-item">
-                            {{ schedule.name }} - {{ schedule.startTime|date('H:i') }} to {{ schedule.endTime|date('H:i') }}
+                            {{ schedule.subject }} ({{ schedule.schedules.value }})
                         </li>
                     {% endfor %}
                 </ul>
@@ -51,10 +51,52 @@
                 <p>No schedule for B3 today</p>
             {% endif %}
         </div>
+    
+        <div class="mt-5">
+            {% if externalNews %}
+            <div class="mb-4">
+                <h3>Dernière actualité d'Amiens</h3>
+                <div class="card">
+                    {% if externalNews.image %}
+                    <img src="{{ externalNews.image }}" class="card-img-top" alt="{{ externalNews.title }}">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ externalNews.title }}</h5>
+                        <p class="card-text">{{ externalNews.description }}</p>
+                        <a href="{{ externalNews.link }}" class="btn btn-primary" target="_blank">Lire la suite</a>
+                    </div>
+                </div>
+            </div>
+            {% endif %}
+    
+            <h2>Dernières actualités</h2>
+            <div class="row">
+                {% for news in latestNews %}
+                <div class="col-md-4 mb-4">
+                    <div class="card">
+                        {% if news.imageName %}
+                        <img src="{{ asset('images/news/' ~ news.imageName) }}" class="card-img-top" alt="{{ news.title }}">
+                        {% endif %}
+                        <div class="card-body">
+                            <h5 class="card-title">{{ news.title }}</h5>
+                            <p class="card-text">{{ news.description }}</p>
+                        </div>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
     </div>
 
     <div class="mt-4">
-        <h4>Week: {{ week.first }} to {{ week.last }}</h4>
+        <h4>Week:
+        {% if week.first matches '/^\\d{4}-\\d{2}-\\d{2}$/' %}
+            {{ week.first|date('Y-m-d') }} to {{ week.last|date('Y-m-d') }}
+        {% else %}
+            {{ week.first }} to {{ week.last }}
+        {% endif %}
+        </h4>
     </div>
 </div>
 {% endblock %}
+
